@@ -46,15 +46,4 @@ components/
 public/
 ```
 
-## 📌 Roadmap
-
-- [x] Project setup
-- [x] App Router
-- [x] Navigation
-- [ ] Layout Design
-- [ ] Hiragana lessons
-- [ ] Katakana lessons
-- [ ] Handwriting practice
-- [ ] Quiz engine
-
 
