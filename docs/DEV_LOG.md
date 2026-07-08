@@ -29,6 +29,22 @@
 - Improved my understanding of shipping minimum viable product allowing to focus on important components
 - Learned about Conversation Management in Claude and tips for understanding and selecting models based on tasks for effective token usage
 
+## Day 3
+
+### Completed
+- Finalized the initial visual theme and color palette for MojiNook.
+- Implemented reusable global design styles (typography, background, animations).
+- Added the first SVG mascot asset to the application.
+
+### Challenges
+- Resolved CSS issues in globals.css.
+- Debugged SVG asset integration and image rendering in Next.js.
+
+### Learned
+- Understanding and refactoring AI-generated code.
+- Understood what belongs inside globals.css and how to separate design concerns (typography, backgrounds, animations, accessibility).
+- Learned to debug image integration issues, including incorrect paths, scaling, and transparent backgrounds.
+
 ## 🚩 Milestones
 
 ### Week 1

@@ -30,7 +30,7 @@ Building the first MVP of MojiNook featuring:
 - [x] Documentation Layout
 
 ## Day 3
-- [ ] Layout Design (Part 1)
+- [x] Layout Design (Part 1)
   - Typography
   - Colors
   - Buttons
