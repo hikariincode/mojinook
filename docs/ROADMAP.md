@@ -38,7 +38,7 @@ Building the first MVP of MojiNook featuring:
   - Tools Reasearch (exploring feasible tools for storage, logging, unit tests, deployment)
 
 ## Day 4
-- [ ] Layout Design (Part 2)
+- [x] Layout Design (Part 2)
   - Pending work from Layout Design (Part 1)
   - Navigation
   - Responsive Layout

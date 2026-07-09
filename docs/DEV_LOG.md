@@ -45,6 +45,23 @@
 - Understood what belongs inside globals.css and how to separate design concerns (typography, backgrounds, animations, accessibility).
 - Learned to debug image integration issues, including incorrect paths, scaling, and transparent backgrounds.
 
+## Day 4
+
+### Completed
+- Built the initial application layout skeleton for MojiNook.
+- Created rough layouts for all core application pages.
+- Learned to implement and use the reusable component.
+
+### Challenges
+- Resolved layout and CSS consistency issues across pages.
+- Refactored AI-generated (Claude) code to improve readability and maintainability.
+- Debugged page related issues with claude code generated code.
+
+### Learned
+- Better understanding of page layout composition in Next.js.
+- Learned how to structure reusable React components.
+- Improved confidence in debugging and refactoring AI-generated code.
+
 ## 🚩 Milestones
 
 ### Week 1
