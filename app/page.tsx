@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { InkButton } from "@/components/buttons";
 
 export default function WelcomePage() {
   return(<div className="min-h-screen washi-bg flex items-center justify-center px-6">
@@ -19,7 +20,12 @@ export default function WelcomePage() {
     <p className="font-body text-[#8C8478]">
       Learn hiragana and katakana through mnemonics.
     </p>
-
+    <InkButton
+            variant="ghost"
+            className= "opacity-30 pointer-events-none"
+          >
+            Begin
+          </InkButton>
   </div>
 </div>)
 }
