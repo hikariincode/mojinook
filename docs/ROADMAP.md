@@ -46,8 +46,8 @@ Building the first MVP of MojiNook featuring:
   - Animations Research
 
 ## Day 5
-- [ ] Home Page
-- [ ] Gojūon Table (ordering and grouping kana for hiragana and katakana)
+- [x] Home Page
+- [x] Gojūon Table (ordering and grouping kana for hiragana and katakana)
 
 ## Day 6
 - [ ] Data Layer

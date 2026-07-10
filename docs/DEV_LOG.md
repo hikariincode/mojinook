@@ -62,6 +62,30 @@
 - Learned how to structure reusable React components.
 - Improved confidence in debugging and refactoring AI-generated code.
 
+## Day 5
+
+### Completed
+- Diagnosed and fixed Tailwind v4 syntax breaking theme colors across components.
+- Wired up navigation: Link-based routing for home and learn pages
+- Set up centralized `lib/routes.ts` for route constants instead of hardcoded path strings.
+- Refactored kana data model from two parallel hiragana/katakana lists into a single unified `ROWS` dataset (shared structure, toggle reads different fields).
+- Built and polished the `/learn` page row cards: hover/active/focus states, right-aligned reveal arrow, button-like affordance with help of claude code.
+
+### Challenges
+- Root-caused invisible button styling to a Tailwind v3→v4 breaking change in arbitrary-value CSS variable syntax.
+- Untangled flexbox layout so the hover arrow anchors to the card's right edge instead of trailing after content.
+- Caught a data inconsistency (mixed romaji format) before it could cause quiz-matching bugs later.
+
+### Learned
+- Tailwind v4's CSS variable shorthand (`bg-(--var)`) differs from v3.4's and old syntax fails silently instead of erroring — worth checking version-specific docs before assuming familiar syntax still applies.
+- Route groups in Next.js App Router are invisible to the URL, useful for organizing without affecting paths.
+- Value of separating concerns in data models early (e.g. splitting a pronunciation hint from the canonical answer key) to avoid rework once quiz logic depends on that data.
+- `group-hover` requires an explicit `group` class on the ancestor — a common gotcha with Tailwind's state variants.
+
+### To-Dos
+- Setting up unit tests for project
+- Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.
+
 ## 🚩 Milestones
 
 ### Week 1
