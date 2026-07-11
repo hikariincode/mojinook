@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:report": "vitest run",
+    "test:report:archive": "node -e \"require('fs').cpSync('test/report', 'test/report-history/' + new Date().toISOString().replace(/[:.]/g,'-'), {recursive:true})\"",
+    "test:report:view": "npm run test:report && npm run test:report:archive && node scripts/prune-reports.js && npx serve test/report -p 4173"
   },
   "overrides": {
     "postcss": "^8.5.10"
@@ -18,12 +23,18 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/ui": "^4.1.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "jsdom": "^29.1.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }
