@@ -86,6 +86,30 @@
 - Setting up unit tests for project
 - Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.
 
+## Day 6
+
+### Completed
+- Set up Vitest + React Testing Library with tests mirroring the source tree structure.
+- Added report history: each run archives a timestamped snapshot to `test/report-history/`, auto-pruned to the last 3 runs via `scripts/prune-reports.js`.
+- Documented the entire testing workflow in CLAUDE.md, including a known accessible-name gotcha in RTL queries.
+
+### Challenges
+- Wired `test/setup.ts` to call `cleanup()` after each test, preventing DOM leakage between test runs.
+- `npx vite preview --outDir test/report` failed on vitest's HTML reporter output — it expects a proper Vite build manifest, not a plain static report.
+- Built a static HTML report workflow: `test:report:view` runs tests, fixed port which serves the report on a fixed port (4173) to avoid colliding with `next dev` on 3000, requiring an explicit fixed port to avoid ambiguity between the two local servers.
+- Caught a defect where learn page's link/button's accessible `name` in RTL includes all its text content for row name created. (Needs to re-think on hiragana and katakana page routing)
+
+### Learned
+- Learned on setting up and writing tests for project using Vitest + React Testing Library. 
+- Vitest's HTML reporter output isn't a Vite build artifact — tools like `vite preview` that expect a manifest can fail on it even when the folder path is correct; a plain static server (`serve`) is the more reliable fit.
+- Repeated multi-step workflows (run → archive → prune → serve) are worth wrapping as npm scripts + a slash command rather than re-explaining steps each session — cheaper on tokens and removes the chance of skipping a step.
+
+
+### To-Dos
+- Setting up unit tests for project: Done
+- Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.
+- Rethink on routing structure for hiragana and katakana
+
 ## 🚩 Milestones
 
 ### Week 1
