@@ -110,6 +110,7 @@
 - Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.
 - Rethink on routing structure for hiragana and katakana
 
+
 ## 🚩 Milestones
 
 ### Week 1

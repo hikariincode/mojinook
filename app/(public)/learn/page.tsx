@@ -66,7 +66,7 @@ export default function LearnPage() {
                 </div>
               </div>
 
-              <span className="ml-auto shrink-0 text-(--color-hanko) opacity-0 group-hover:opacity-100 transition-opacity text-lg">
+              <span className="font-body text-(--color-hanko) ml-auto shrink-0 text-(--color-hanko) opacity-0 group-hover:opacity-100 transition-opacity text-lg">
                 →
               </span>
             </Link>

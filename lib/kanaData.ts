@@ -2,6 +2,8 @@ export type KanaItem = {
   h: string;   // hiragana
   k: string;   // katakana
   r: string;   // romaji
+  strokesh?: number; // number of strokes required to write the kana
+  strokek?: number; // number of strokes required to write the kana
   pron?: string; // optional pronunciation hint, only when needed
   mh: string;  // mnemonic - hiragana
   mk: string;  // mnemonic - katakana
@@ -13,13 +15,13 @@ export type KanaRow = {
   items: KanaItem[];
 };
 
-export const ROWS = [
+export const ROWS: KanaRow[] = [
   { key: "a", label: "あ / ア", items: [
-    { h: "あ", k: "ア", r: "a", pron: "ah (not eh)", mh: "An antenna sticking up", mk: "A sharp antenna angle" },
-    { h: "い", k: "イ", r: "i", pron: "ee (not ai)", mh: "Two noodles hanging down", mk: "One noodle, sliced thin" },
-    { h: "う", k: "ウ", r: "u", pron: "oo (not yu)", mh: "A hood over a face", mk: "A cup catching rain" },
-    { h: "え", k: "エ", r: "e", pron: "eh (not e)", mh: "A person stretching an arm", mk: "A ladder on its side" },
-    { h: "お", k: "オ", r: "o", mh: "A kid tying an obi bow", mk: "A tail flicking outward" },
+    { h: "あ", k: "ア", r: "a", strokesh: 3, strokek: 3, pron: "ah (not eh)", mh: "An antenna sticking up", mk: "A sharp antenna angle" },
+    { h: "い", k: "イ", r: "i", strokesh: 2, strokek: 2, pron: "ee (not ai)", mh: "Two noodles hanging down", mk: "One noodle, sliced thin" },
+    { h: "う", k: "ウ", r: "u", strokesh: 2, strokek: 2, pron: "oo (not yu)", mh: "A hood over a face", mk: "A cup catching rain" },
+    { h: "え", k: "エ", r: "e", strokesh: 2, strokek: 2, pron: "eh (not e)", mh: "A person stretching an arm", mk: "A ladder on its side" },
+    { h: "お", k: "オ", r: "o", strokesh: 2, strokek: 2, mh: "A kid tying an obi bow", mk: "A tail flicking outward" },
   ]},
   { key: "ka", label: "か / カ", items: [
     { h: "か", k: "カ", r: "ka", mh: "A sickle cutting grass", mk: "A sharp sickle blade" },
