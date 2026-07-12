@@ -110,6 +110,23 @@
 - Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.
 - Rethink on routing structure for hiragana and katakana
 
+## Day 7
+
+### Completed
+- Added writing pad prototpe with help of claude (yet to understand workflow and code behind writing pad component)
+- Rebuilt the layout to match a reference mock: a two-panel row (sample reference panel + drawing canvas, later swapped left/right), using `mascot/welcome-nekochan.svg` as a placeholder sample image via `next/image`.
+
+### Challenges
+- Converted the writing-pad prototype (`components/pad/WritingPad.ts` + `handwriting/page.tsx`) from broken/truncated JS into a single typed client component, `WritingPad.tsx`.
+
+### Learned
+- Tried building the entire writing pad component entirely by claude without manual modification of code.
+
+### To-Dos
+- Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.
+- Rethink on routing structure for hiragana and katakana
+- Debug integration issues and understand code behind writing pad.
+
 
 ## 🚩 Milestones
 

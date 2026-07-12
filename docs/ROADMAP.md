@@ -50,15 +50,15 @@ Building the first MVP of MojiNook featuring:
 - [x] Gojūon Table (ordering and grouping kana for hiragana and katakana)
 
 ## Day 6
-- [ ] Data Layer
-- [ ] Integration
+- [x] Data Layer
+- [x] Integration
 
 ---
 
 # Week 2 — Learning Module
 
 ## Day 7
-- [ ] Handwriting Canvas (Prototype)
+- [x] Handwriting Canvas (Prototype)
 
 ## Day 8
 - [ ] Undo / Redo
