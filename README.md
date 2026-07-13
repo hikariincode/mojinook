@@ -41,9 +41,12 @@ npm run dev
 ## 📁 Project Structure
 
 ```
+
 app/
 components/
 public/
+
 ```
 
 
+```

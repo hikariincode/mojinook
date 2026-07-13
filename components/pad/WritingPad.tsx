@@ -9,7 +9,7 @@ import { routes } from "@/lib/routes";
 const CANVAS_SIZE = 320;
 
 const PRACTICE_KANA = ROWS.flatMap((row) =>
-  row.items.map((item) => ({ h: item.h, r: item.r, strokes: item.strokesh }))
+  row.items.map((item) => ({ h: item.h, r: item.r, strokes: item.strokesh })),
 );
 
 type Point = { x: number; y: number };
@@ -26,7 +26,8 @@ export default function WritingPad() {
   const kana = PRACTICE_KANA[kanaIndex];
 
   const getPos = (
-    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+    e:
+      React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
   ): Point => {
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
@@ -39,7 +40,8 @@ export default function WritingPad() {
   };
 
   const startStroke = (
-    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+    e:
+      React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
   ) => {
     e.preventDefault();
     drawing.current = true;
@@ -48,7 +50,8 @@ export default function WritingPad() {
   };
 
   const moveStroke = (
-    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+    e:
+      React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
   ) => {
     if (!drawing.current) return;
     e.preventDefault();
@@ -124,34 +127,44 @@ export default function WritingPad() {
   }, [strokes, currentStroke, showGuide, kana.h]);
 
   return (
-    <div className="min-h-screen washi-bg flex items-center justify-center px-6 py-10 font-body">
-      <div className="max-w-2xl w-full animate-brush">
-        <div className="text-center mb-6">
-          <div className="font-mono text-[10px] tracking-widest text-(--color-muted) uppercase mb-1">
+    <div className="washi-bg font-body flex min-h-screen items-center justify-center px-6 py-10">
+      <div className="animate-brush w-full max-w-2xl">
+        <div className="mb-6 text-center">
+          <div className="mb-1 font-mono text-[10px] tracking-widest text-(--color-muted) uppercase">
             Writing Pad
           </div>
-          <h1 className="font-display text-2xl text-(--color-sumi)">Practice a stroke</h1>
+          <h1 className="font-display text-2xl text-(--color-sumi)">
+            Practice a stroke
+          </h1>
         </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <button onClick={prevKana} className="font-body text-(--color-muted) hover:text-(--color-hanko) px-2">
+        <div className="mb-4 flex items-center justify-between">
+          <button
+            onClick={prevKana}
+            className="font-body px-2 text-(--color-muted) hover:text-(--color-hanko)"
+          >
             ←
           </button>
           <div className="text-center">
-            <div className="font-display text-xl text-(--color-aizome)">{kana.h}</div>
+            <div className="font-display text-xl text-(--color-aizome)">
+              {kana.h}
+            </div>
             <div className="font-mono text-[10px] text-(--color-muted)">
               {kana.r}
               {kana.strokes ? ` · ${kana.strokes} strokes` : ""}
             </div>
           </div>
-          <button onClick={nextKana} className="font-body text-(--color-muted) hover:text-(--color-hanko) px-2">
+          <button
+            onClick={nextKana}
+            className="font-body px-2 text-(--color-muted) hover:text-(--color-hanko)"
+          >
             →
           </button>
         </div>
 
-        <div className="flex items-start justify-center gap-6 flex-wrap">
+        <div className="flex flex-wrap items-start justify-center gap-6">
           <div
-            className="bg-white/60 rounded-sm border border-(--color-sumi)/15 flex items-center justify-center"
+            className="flex items-center justify-center rounded-sm border border-(--color-sumi)/15 bg-white/60"
             style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}
           >
             <Image
@@ -159,16 +172,19 @@ export default function WritingPad() {
               alt="Sample stroke reference"
               width={160}
               height={160}
-              className="w-2/3 h-auto opacity-70"
+              className="h-auto w-2/3 opacity-70"
             />
           </div>
 
-          <div className="relative" style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}>
+          <div
+            className="relative"
+            style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}
+          >
             <canvas
               ref={canvasRef}
               width={CANVAS_SIZE}
               height={CANVAS_SIZE}
-              className="bg-white/60 rounded-sm border border-(--color-sumi)/15 touch-none cursor-crosshair"
+              className="cursor-crosshair touch-none rounded-sm border border-(--color-sumi)/15 bg-white/60"
               onMouseDown={startStroke}
               onMouseMove={moveStroke}
               onMouseUp={endStroke}
@@ -180,9 +196,9 @@ export default function WritingPad() {
           </div>
         </div>
 
-        <div className="max-w-sm mx-auto">
-          <div className="flex items-center justify-center mt-3 mb-6">
-            <label className="flex items-center gap-2 font-mono text-[10px] text-(--color-muted) uppercase tracking-wide">
+        <div className="mx-auto max-w-sm">
+          <div className="mt-3 mb-6 flex items-center justify-center">
+            <label className="flex items-center gap-2 font-mono text-[10px] tracking-wide text-(--color-muted) uppercase">
               <input
                 type="checkbox"
                 checked={showGuide}
@@ -192,25 +208,25 @@ export default function WritingPad() {
             </label>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 mb-2">
+          <div className="mb-2 grid grid-cols-2 gap-2">
             <button
               onClick={undoStroke}
               disabled={strokes.length === 0}
-              className="font-body text-sm px-4 py-2.5 rounded-sm border border-(--color-sumi)/15 text-(--color-sumi) disabled:opacity-30 hover:border-(--color-aizome) transition-colors"
+              className="font-body rounded-sm border border-(--color-sumi)/15 px-4 py-2.5 text-sm text-(--color-sumi) transition-colors hover:border-(--color-aizome) disabled:opacity-30"
             >
               Undo stroke
             </button>
             <button
               onClick={clearAll}
               disabled={strokes.length === 0}
-              className="font-body text-sm px-4 py-2.5 rounded-sm border border-(--color-hanko)/30 text-(--color-hanko) disabled:opacity-30 hover:bg-(--color-hanko)/5 transition-colors"
+              className="font-body rounded-sm border border-(--color-hanko)/30 px-4 py-2.5 text-sm text-(--color-hanko) transition-colors hover:bg-(--color-hanko)/5 disabled:opacity-30"
             >
               Clear
             </button>
           </div>
           <Link
             href={routes.learn}
-            className="block w-full text-center font-body text-sm px-4 py-2.5 rounded-sm bg-(--color-aizome) text-(--color-washi) hover:bg-[#254161] transition-colors"
+            className="font-body block w-full rounded-sm bg-(--color-aizome) px-4 py-2.5 text-center text-sm text-(--color-washi) transition-colors hover:bg-[#254161]"
           >
             ← Back to learn page
           </Link>

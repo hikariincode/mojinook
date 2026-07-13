@@ -1,0 +1,5 @@
+.next
+node_modules
+test/report
+test/report-history
+tsconfig.tsbuildinfo

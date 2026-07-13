@@ -19,7 +19,9 @@ test("renders a row link for every gojuon row, defaulting to hiragana", () => {
     const link = screen.getByRole("link", {
       name: new RegExp(`^${row.key.toUpperCase()} ROW\\b`),
     });
-    expect(link.getAttribute("href")).toBe(routes.learnRow("hiragana", row.key));
+    expect(link.getAttribute("href")).toBe(
+      routes.learnRow("hiragana", row.key),
+    );
   }
 });
 
@@ -35,7 +37,9 @@ test("switches displayed characters to katakana when that tab is selected", () =
   const link = screen.getByRole("link", {
     name: new RegExp(`^${firstRow.key.toUpperCase()} ROW\\b`),
   });
-  expect(link.getAttribute("href")).toBe(routes.learnRow("katakana", firstRow.key));
+  expect(link.getAttribute("href")).toBe(
+    routes.learnRow("katakana", firstRow.key),
+  );
 });
 
 test("links Take a Quiz to the quiz page", () => {

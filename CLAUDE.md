@@ -37,29 +37,35 @@ Moji Nook — a Japanese learning platform (Next.js 16 / React 19 / TypeScript /
 - A link/button's accessible `name` in RTL includes all its text content, not just the visible label you're thinking of (e.g. a row link's name is "A ROW あ a い i ..." not just "A ROW"). Anchor regexes with `^` and `\b` (not `$`) when matching a prefix, and watch for one label being a substring of another (e.g. `/A ROW/` also matches "KA ROW").
 
 ## Tailwind v4
+
 - CSS vars: `bg-(--color-x)` NOT `bg-[--color-x]` (v3 syntax fails silently)
 - `bg-[value]` only for literal values (`h-[2px]`), never `--vars`
 - Theme colors: `globals.css` `:root`
 
 ## Routing
+
 - Filesystem-based, no router config
 - `(group)` folders are invisible in URL
 - All paths via `lib/routes.ts` — never hardcode strings
 - Default `<Link href>`; `router.push()` only if pre-nav logic needed
 
 ## Data
+
 - One unified structure over parallel lists (merge, don't duplicate)
 - Separate "answer key" fields from "display hint" fields
 - Flag format inconsistencies across dataset entries before they spread
 
 ## Components
+
 - Reusable UI → `components/`, one file each
 - Clickable cards: hover (lift+shadow) + active (press) + focus-visible, not just border
 - `group-hover:` needs `group` on ancestor
 - Hover-only affordances need dimmed always-visible fallback (touch has no hover)
 
 ## Formatting
+
 - Prettier + prettier-plugin-tailwindcss, format-on-save — don't hand-order classes
 
 ## Debug order for "styles not applying"
+
 1. Valid syntax for TW version? 2. CSS var defined? 3. postcss config wired?

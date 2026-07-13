@@ -1,48 +1,40 @@
 import { InkButton } from "@/components/buttons";
 
 export default function HiraganaPage() {
-  return (<div className="min-h-screen washi-bg px-6 py-10 flex flex-col">
-      <div className="max-w-md w-full mx-auto flex-1 flex flex-col">
-
-        <div className="flex justify-center gap-2 mb-6">
-          <button            
-            className={`font-mono text-[10px] px-3 py-1.5 rounded-sm border "bg-[--color-aizome] text-[--color-washi] border-[--color-aizome]"`}
+  return (
+    <div className="washi-bg flex min-h-screen flex-col px-6 py-10">
+      <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
+        <div className="mb-6 flex justify-center gap-2">
+          <button
+            className={`"bg-[--color-aizome] border-[--color-aizome]" rounded-sm border px-3 py-1.5 font-mono text-[10px] text-[--color-washi]`}
           >
             HIRAGANA
           </button>
-          <button           
-            className={`font-mono text-[10px] px-3 py-1.5 rounded-sm border "bg-[--color-aizome] text-[--color-washi] border-[--color-aizome]"`}
+          <button
+            className={`"bg-[--color-aizome] border-[--color-aizome]" rounded-sm border px-3 py-1.5 font-mono text-[10px] text-[--color-washi]`}
           >
             KATAKANA
           </button>
         </div>
 
-        <div className="brush-in bg-white/50 border border-[--color-sumi]/10 rounded-sm p-10 flex-1 flex flex-col items-center justify-center text-center">
+        <div className="brush-in flex flex-1 flex-col items-center justify-center rounded-sm border border-[--color-sumi]/10 bg-white/50 p-10 text-center">
           {/* space reserved for a future hand-drawn mnemonic image */}
-          <div className="font-display text-[7rem] leading-none text-[--color-sumi] mb-4">
-            
-          </div>
-          <div className="font-mono text-sm text-[--color-hanko] tracking-widest uppercase mb-6"></div>
-          <p className="font-body text-[--color-muted] max-w-xs leading-relaxed">
-            
-          </p>
+          <div className="font-display mb-4 text-[7rem] leading-none text-[--color-sumi]"></div>
+          <div className="mb-6 font-mono text-sm tracking-widest text-[--color-hanko] uppercase"></div>
+          <p className="font-body max-w-xs leading-relaxed text-[--color-muted]"></p>
         </div>
 
-        <div className="flex items-center justify-between mt-6">
-          <InkButton
-            variant="ghost"
-          >
-            ← Prev
-          </InkButton>
+        <div className="mt-6 flex items-center justify-between">
+          <InkButton variant="ghost">← Prev</InkButton>
           <div className="flex gap-1.5">
             (
-              <div key={1} className={`w-1.5 h-1.5 rounded-full ${ "bg-[--color-hanko]"}`} />
+            <div
+              key={1}
+              className={`h-1.5 w-1.5 rounded-full ${"bg-[--color-hanko]"}`}
+            />
             )
           </div>
-          <InkButton
-            variant="ghost"
-            className= "opacity-30 pointer-events-none"
-          >
+          <InkButton variant="ghost" className="pointer-events-none opacity-30">
             Next →
           </InkButton>
         </div>

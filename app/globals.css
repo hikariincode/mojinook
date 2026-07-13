@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 @import "tailwindcss";
 
@@ -12,54 +12,96 @@
    fog    #8C8478   secondary text
 ============================================================== */
 :root {
-  --color-washi: #F5EFE1;
+  --color-washi: #f5efe1;
   --color-sumi: #262220;
-  --color-muted: #8C8478;
-  --color-aizome: #2C5170;
-  --color-hanko: #B23B32;
-  --color-kin: #B8912F;
+  --color-muted: #8c8478;
+  --color-aizome: #2c5170;
+  --color-hanko: #b23b32;
+  --color-kin: #b8912f;
 }
 /* ===================================================
    Fonts
 =================================================== */
 
-.font-display { font-family: 'Shippori Mincho', serif; }
-.font-body { font-family: 'Zen Maru Gothic', sans-serif; }
-.font-mono { font-family: 'JetBrains Mono', monospace; }
+.font-display {
+  font-family: "Shippori Mincho", serif;
+}
+.font-body {
+  font-family: "Zen Maru Gothic", sans-serif;
+}
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
 
 /* ===================================================
    Backgrounds
 =================================================== */
 
 .washi-bg {
-      background-color: var(--color-washi);
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(180,160,120,0.06) 0%, transparent 45%),
-        radial-gradient(circle at 80% 70%, rgba(180,160,120,0.06) 0%, transparent 45%),
-        repeating-linear-gradient(0deg, rgba(140,132,120,0.025) 0px, transparent 1px, transparent 2px, rgba(140,132,120,0.025) 3px);
-    }
+  background-color: var(--color-washi);
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(180, 160, 120, 0.06) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(180, 160, 120, 0.06) 0%,
+      transparent 45%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(140, 132, 120, 0.025) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(140, 132, 120, 0.025) 3px
+    );
+}
 
 /* ===================================================
    Animations
 =================================================== */
 
 @keyframes stamp-in {
-      0% { transform: scale(2.2) rotate(-18deg); opacity: 0; }
-      60% { transform: scale(0.92) rotate(-10deg); opacity: 1; }
-      100% { transform: scale(1) rotate(-8deg); opacity: 1; }
-    }
-    .animate-stamp { animation: stamp-in 0.35s ease-out forwards; }
+  0% {
+    transform: scale(2.2) rotate(-18deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.92) rotate(-10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+    opacity: 1;
+  }
+}
+.animate-stamp {
+  animation: stamp-in 0.35s ease-out forwards;
+}
 
 @keyframes brush-in {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-brush { animation: brush-in 0.4s ease-out forwards; }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-brush {
+  animation: brush-in 0.4s ease-out forwards;
+}
 
 /* ===================================================
    Accessibility
 =================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-      .animate-stamp, .animate-brush { animation: none !important; }
-    }
+  .animate-stamp,
+  .animate-brush {
+    animation: none !important;
+  }
+}

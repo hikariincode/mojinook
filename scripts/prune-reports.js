@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const dir = 'test/report-history';
+const dir = "test/report-history";
 const KEEP = 3;
 
 if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
