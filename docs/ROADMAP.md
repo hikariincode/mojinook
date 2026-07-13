@@ -69,9 +69,9 @@ Building the first MVP of MojiNook featuring:
 
 ## Day 8
 
-- [ ] Undo / Redo
-- [ ] Trace Mode
-- [ ] Stroke Order
+- [x] Undo / Redo
+- [x] Trace Mode
+- [x] Stroke Order
 
 ## Day 9
 

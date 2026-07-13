@@ -150,9 +150,39 @@
 - Rethink on routing structure for hiragana and katakana
 - Debug integration issues and understand code behind writing pad.
 
+## Day 8
+
+### Completed
+
+- Refactored `WritingPad.tsx` — pulled the canvas drawing logic into a `useDrawingCanvas.ts` hook, and split the nav header and controls footer into `KanaNavigator.tsx` and `PadControls.tsx`. Component's a lot leaner now, each piece testable on its own
+- Reused the existing `InkButton` component (wrapped in `Link`) for the "Back to learn page" action instead of a one-off styled anchor, matching the pattern already used on the welcome page.
+
+### Challenges
+
+- Indentifying the components the way to decouple them from large file
+
+### Learned
+
+- Had Claude Code help me untangle `WritingPad.tsx` — decoupled it into a drawing hook plus separate nav/control components. Cleaner to test and way less overwhelming to look at.
+
+### To-Dos
+
+- Set up Prettier + Tailwind class-sorting plugin for consistent formatting going forward.: Done
+- Rethink on routing structure for hiragana and katakana
+- Debug integration issues and understand code behind writing pad.
+
 ## 🚩 Milestones
 
 ### Week 1
+
+- Project scaffolded: Next.js App Router structure, GitHub repo, 30-day MVP roadmap, and daily logging workflow in place.
+- Visual foundation established: color palette, typography, global design styles, and first mascot SVG asset.
+- Core app skeleton built: layout and rough pages for all main routes, using reusable, centrally-routed (`lib/routes.ts`) components.
+- `/learn` page shipped with polished row cards (hover/active/focus states) and a unified `ROWS` kana data model replacing duplicated hiragana/katakana lists.
+- Tailwind v4 CSS-variable syntax gotcha diagnosed and documented, fixing invisible button styling.
+- Test infrastructure added: Vitest + React Testing Library, mirrored test tree, static HTML report with history/pruning, all documented in CLAUDE.md.
+- Writing pad prototype built (two-panel layout: reference image + drawing canvas) as first pass toward handwriting practice, though internals still need to be understood.
+
 
 ### Week 2
 
