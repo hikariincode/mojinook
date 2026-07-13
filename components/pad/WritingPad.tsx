@@ -1,80 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import Image from "next/image";
 import { ROWS } from "@/lib/kanaData";
 import { routes } from "@/lib/routes";
-
-const CANVAS_SIZE = 320;
+import { useDrawingCanvas } from "@/lib/hooks/useDrawingCanvas";
+import { KanaNavigator } from "./KanaNavigator";
+import { PadControls } from "./PadControls";
 
 const PRACTICE_KANA = ROWS.flatMap((row) =>
-  row.items.map((item) => ({ h: item.h, r: item.r, strokes: item.strokesh })),
+  row.items.map((item) => ({ h: item.h, r: item.r, strokes: item.strokesh }))
 );
-
-type Point = { x: number; y: number };
-type Stroke = Point[];
 
 export default function WritingPad() {
   const [kanaIndex, setKanaIndex] = useState(0);
-  const [strokes, setStrokes] = useState<Stroke[]>([]);
-  const [currentStroke, setCurrentStroke] = useState<Stroke | null>(null);
   const [showGuide, setShowGuide] = useState(true);
-
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const drawing = useRef(false);
   const kana = PRACTICE_KANA[kanaIndex];
 
-  const getPos = (
-    e:
-      React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
-  ): Point => {
-    const canvas = canvasRef.current;
-    if (!canvas) return { x: 0, y: 0 };
-    const rect = canvas.getBoundingClientRect();
-    const point = "touches" in e ? e.touches[0] : e;
-    return {
-      x: ((point.clientX - rect.left) / rect.width) * CANVAS_SIZE,
-      y: ((point.clientY - rect.top) / rect.height) * CANVAS_SIZE,
-    };
-  };
-
-  const startStroke = (
-    e:
-      React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
-  ) => {
-    e.preventDefault();
-    drawing.current = true;
-    const p = getPos(e);
-    setCurrentStroke([p]);
-  };
-
-  const moveStroke = (
-    e:
-      React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
-  ) => {
-    if (!drawing.current) return;
-    e.preventDefault();
-    const p = getPos(e);
-    setCurrentStroke((prev) => (prev ? [...prev, p] : [p]));
-  };
-
-  const endStroke = () => {
-    if (!drawing.current) return;
-    drawing.current = false;
-    setCurrentStroke((prev) => {
-      if (prev && prev.length > 1) {
-        setStrokes((s) => [...s, prev]);
-      }
-      return null;
-    });
-  };
-
-  const undoStroke = () => setStrokes((s) => s.slice(0, -1));
-  const clearAll = () => {
-    setStrokes([]);
-    setCurrentStroke(null);
-  };
+  const { canvasRef, strokes, canvasSize, handlers, undoStroke, clearAll } =
+    useDrawingCanvas({ guideChar: kana.h, showGuide });
 
   const nextKana = () => {
     setKanaIndex((i) => (i + 1) % PRACTICE_KANA.length);
@@ -85,152 +29,57 @@ export default function WritingPad() {
     clearAll();
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-    ctx.strokeStyle = "rgba(38,34,32,0.08)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(CANVAS_SIZE / 2, 0);
-    ctx.lineTo(CANVAS_SIZE / 2, CANVAS_SIZE);
-    ctx.moveTo(0, CANVAS_SIZE / 2);
-    ctx.lineTo(CANVAS_SIZE, CANVAS_SIZE / 2);
-    ctx.stroke();
-    ctx.strokeRect(1, 1, CANVAS_SIZE - 2, CANVAS_SIZE - 2);
-
-    if (showGuide) {
-      ctx.font = `${CANVAS_SIZE * 0.7}px 'Shippori Mincho', serif`;
-      ctx.fillStyle = "rgba(38,34,32,0.08)";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(kana.h, CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 6);
-    }
-
-    const paintStroke = (stroke: Stroke | null, color: string) => {
-      if (!stroke || stroke.length < 2) return;
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 10;
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.beginPath();
-      ctx.moveTo(stroke[0].x, stroke[0].y);
-      stroke.forEach((p) => ctx.lineTo(p.x, p.y));
-      ctx.stroke();
-    };
-
-    strokes.forEach((s) => paintStroke(s, "#262220"));
-    paintStroke(currentStroke, "#2C5170");
-  }, [strokes, currentStroke, showGuide, kana.h]);
-
   return (
-    <div className="washi-bg font-body flex min-h-screen items-center justify-center px-6 py-10">
-      <div className="animate-brush w-full max-w-2xl">
-        <div className="mb-6 text-center">
-          <div className="mb-1 font-mono text-[10px] tracking-widest text-(--color-muted) uppercase">
+    <div className="min-h-screen washi-bg flex items-center justify-center px-6 py-10 font-body">
+      <div className="max-w-2xl w-full animate-brush">
+        <div className="text-center mb-6">
+          <div className="font-mono text-[10px] tracking-widest text-(--color-muted) uppercase mb-1">
             Writing Pad
           </div>
-          <h1 className="font-display text-2xl text-(--color-sumi)">
-            Practice a stroke
-          </h1>
+          <h1 className="font-display text-2xl text-(--color-sumi)">Practice a stroke</h1>
         </div>
 
-        <div className="mb-4 flex items-center justify-between">
-          <button
-            onClick={prevKana}
-            className="font-body px-2 text-(--color-muted) hover:text-(--color-hanko)"
-          >
-            ←
-          </button>
-          <div className="text-center">
-            <div className="font-display text-xl text-(--color-aizome)">
-              {kana.h}
-            </div>
-            <div className="font-mono text-[10px] text-(--color-muted)">
-              {kana.r}
-              {kana.strokes ? ` · ${kana.strokes} strokes` : ""}
-            </div>
-          </div>
-          <button
-            onClick={nextKana}
-            className="font-body px-2 text-(--color-muted) hover:text-(--color-hanko)"
-          >
-            →
-          </button>
-        </div>
+        <KanaNavigator
+          kanaChar={kana.h}
+          reading={kana.r}
+          strokeCount={kana.strokes}
+          onPrev={prevKana}
+          onNext={nextKana}
+        />
 
-        <div className="flex flex-wrap items-start justify-center gap-6">
+        <div className="flex items-start justify-center gap-6 flex-wrap">
           <div
-            className="flex items-center justify-center rounded-sm border border-(--color-sumi)/15 bg-white/60"
-            style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}
+            className="bg-white/60 rounded-sm border border-(--color-sumi)/15 flex items-center justify-center"
+            style={{ width: canvasSize, height: canvasSize }}
           >
             <Image
               src="/images/mascot/welcome-nekochan.svg"
               alt="Sample stroke reference"
               width={160}
               height={160}
-              className="h-auto w-2/3 opacity-70"
+              className="w-2/3 h-auto opacity-70"
             />
           </div>
 
-          <div
-            className="relative"
-            style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}
-          >
+          <div className="relative" style={{ width: canvasSize, height: canvasSize }}>
             <canvas
               ref={canvasRef}
-              width={CANVAS_SIZE}
-              height={CANVAS_SIZE}
-              className="cursor-crosshair touch-none rounded-sm border border-(--color-sumi)/15 bg-white/60"
-              onMouseDown={startStroke}
-              onMouseMove={moveStroke}
-              onMouseUp={endStroke}
-              onMouseLeave={endStroke}
-              onTouchStart={startStroke}
-              onTouchMove={moveStroke}
-              onTouchEnd={endStroke}
+              width={canvasSize}
+              height={canvasSize}
+              className="bg-white/60 rounded-sm border border-(--color-sumi)/15 touch-none cursor-crosshair"
+              {...handlers}
             />
           </div>
         </div>
 
-        <div className="mx-auto max-w-sm">
-          <div className="mt-3 mb-6 flex items-center justify-center">
-            <label className="flex items-center gap-2 font-mono text-[10px] tracking-wide text-(--color-muted) uppercase">
-              <input
-                type="checkbox"
-                checked={showGuide}
-                onChange={(e) => setShowGuide(e.target.checked)}
-              />
-              Show guide
-            </label>
-          </div>
-
-          <div className="mb-2 grid grid-cols-2 gap-2">
-            <button
-              onClick={undoStroke}
-              disabled={strokes.length === 0}
-              className="font-body rounded-sm border border-(--color-sumi)/15 px-4 py-2.5 text-sm text-(--color-sumi) transition-colors hover:border-(--color-aizome) disabled:opacity-30"
-            >
-              Undo stroke
-            </button>
-            <button
-              onClick={clearAll}
-              disabled={strokes.length === 0}
-              className="font-body rounded-sm border border-(--color-hanko)/30 px-4 py-2.5 text-sm text-(--color-hanko) transition-colors hover:bg-(--color-hanko)/5 disabled:opacity-30"
-            >
-              Clear
-            </button>
-          </div>
-          <Link
-            href={routes.learn}
-            className="font-body block w-full rounded-sm bg-(--color-aizome) px-4 py-2.5 text-center text-sm text-(--color-washi) transition-colors hover:bg-[#254161]"
-          >
-            ← Back to learn page
-          </Link>
-        </div>
+        <PadControls
+          showGuide={showGuide}
+          onShowGuideChange={setShowGuide}
+          canUndo={strokes.length > 0}
+          onUndo={undoStroke}
+          onClear={clearAll}
+          backHref={routes.learn}
+        />
       </div>
     </div>
   );
