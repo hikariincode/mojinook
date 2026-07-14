@@ -171,6 +171,30 @@
 - Rethink on routing structure for hiragana and katakana
 - Debug integration issues and understand code behind writing pad.
 
+## Day 9
+
+### Completed
+
+- Finalized on keeping strokes reference and writing pad as 2 separate components
+- Added claude hooks for formatting for post implementation
+- Added a new theme color (`--color-testsuiro`, #034630) to the `:root` palette in `globals.css`.
+
+### Challenges
+
+- During deciding design for handwriting page faced challenge to think and build the page
+
+### Learned
+
+- Learned to build the project's `PostToolUse` hook (`.claude/hooks/format-on-edit.sh`) runs Prettier automatically after every Claude-made edit — it's a plain shell script, not a model call, so it runs async and costs no LLM tokens; only hook output that gets surfaced back into the conversation would add to token usage, and this hook returns none.
+
+- Learned basics on skills and plugins features of claude code. 
+
+### To-Dos
+
+- Rethink on routing structure for hiragana and katakana
+- Debug integration issues and understand code behind writing pad.
+- Audit remaining components for other `--color-aizome` usages that may need to move to `--color-testsuiro` for palette consistency.
+
 ## 🚩 Milestones
 
 ### Week 1

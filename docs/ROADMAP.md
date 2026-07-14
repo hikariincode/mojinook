@@ -75,7 +75,7 @@ Building the first MVP of MojiNook featuring:
 
 ## Day 9
 
-- [ ] Resolving Integration Issues For Canvas
+- [x] Resolving Integration Issues For Canvas
 
 ## Day 10
 
