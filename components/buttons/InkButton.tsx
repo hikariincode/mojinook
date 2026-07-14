@@ -15,8 +15,8 @@ const InkButton = ({
 
   const variants = {
     primary:
-      "bg-(--color-aizome) text-(--color-washi) border border-(--color-aizome) hover:opacity-90",
-    ghost: "bg-transparent text-(--color-aizome) border-(--color-aizome)/40",
+      "bg-(--color-testsuiro) text-(--color-washi) border border-(--color-testsuiro) hover:opacity-90",
+    ghost: "bg-transparent text-(--color-testsuiro) border-(--color-testsuiro)/40",
     danger: "bg-(--color-hanko) text-(--color-washi) border-(--color-hanko)",
   };
 
