@@ -195,6 +195,32 @@
 - Debug integration issues and understand code behind writing pad.
 - Audit remaining components for other `--color-aizome` usages that may need to move to `--color-testsuiro` for palette consistency.
 
+## Day 10
+
+### Completed
+
+- Built the first mnemonic card prototype for `/learn/hiragana` from a hand-sketched reference mock: `components/learn/KanaMnemonicCard.tsx`, wired to `lib/kanaData.ts` (no hardcoded per-letter content).
+- Card layout: aizome romaji badge (top-left), mascot placeholder image (`welcome-nekochan.svg` via `next/image`) as the stand-in for a future hand-drawn mnemonic illustration, and a kin-colored mnemonic strip with a washi letter tile plus `Mnemonic:` / `Say:` text — `Say:` falls back from `pron` to `r` when no pronunciation hint exists.
+- Rebuilt `app/(public)/learn/hiragana/page.tsx` to drive the card off row/item state with working Prev/Next navigation and per-row dot indicators (replacing the old static placeholder markup).
+- Iterated on card sizing twice on request: first from full-height stretch to content-sized, then locked to a fixed `aspect-5/7` portrait rectangle so it reads as a card rather than a filled panel.
+
+### Challenges
+
+- Initial card used `flex-1` and stretched to fill the page's remaining vertical space — had to strip that and switch the parent to `justify-center` before a fixed aspect ratio would actually take effect.
+- No headless browser tool (chromium-cli/Playwright) available in this environment to screenshot-verify the layout — fell back to curling the rendered HTML for expected content/status code instead of a real visual check.
+
+### Learned
+
+- Learned more building ui components and their sizing to build prototype.
+
+### To-Dos
+
+- Rethink on routing structure for hiragana and katakana
+- Debug integration issues and understand code behind writing pad.
+- Audit remaining components for other `--color-aizome` usages that may need to move to `--color-testsuiro` for palette consistency.
+- Set up a screenshot-capable run skill (chromium-cli/Playwright) so future UI changes can be visually verified instead of HTML-only checks.
+- Replace the mascot placeholder image in `KanaMnemonicCard` with real per-letter mnemonic illustrations once art is ready.
+
 ## 🚩 Milestones
 
 ### Week 1

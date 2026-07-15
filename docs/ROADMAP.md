@@ -79,7 +79,7 @@ Building the first MVP of MojiNook featuring:
 
 ## Day 10
 
-- [ ] AA + KA from Hiragana and Katakana (letter cards, kana, romaji with mnemonics and handwriting canvas strokes order)
+- [x] AA + KA from Hiragana and Katakana (letter cards, kana, romaji with mnemonics and handwriting canvas strokes order)
 
 ## Day 11
 
