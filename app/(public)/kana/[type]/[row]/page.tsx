@@ -1,14 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { notFound, useParams } from "next/navigation";
 import { ROWS } from "@/lib/kanaData";
-import { routes } from "@/lib/routes";
 import { InkButton } from "@/components/buttons";
 import { KanaMnemonicCard } from "@/components/learn";
 
-export default function HiraganaPage() {
-  const [rowIdx, setRowIdx] = useState(0);
+type KanaType = "hiragana" | "katakana";
+
+function isKanaType(value: string): value is KanaType {
+  return value === "hiragana" || value === "katakana";
+}
+
+export default function KanaPage() {
+  const params = useParams<{ type: string; row: string }>();
+
+  if (!isKanaType(params.type)) {
+    notFound();
+  }
+  const startRowIdx = ROWS.findIndex((r) => r.key === params.row);
+  if (startRowIdx === -1) {
+    notFound();
+  }
+
+  const [kanaType, setKanaType] = useState<KanaType>(params.type);
+  const [rowIdx, setRowIdx] = useState(startRowIdx);
   const [itemIdx, setItemIdx] = useState(0);
 
   const row = ROWS[rowIdx];
@@ -41,18 +57,29 @@ export default function HiraganaPage() {
     <div className="washi-bg flex min-h-screen flex-col px-6 py-10">
       <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
         <div className="mb-6 flex justify-center gap-2">
-          <button className="rounded-sm border border-(--color-aizome) bg-(--color-aizome) px-3 py-1.5 font-mono text-[10px] text-(--color-washi)">
+          <button
+            onClick={() => setKanaType("hiragana")}
+            className={`rounded-sm border px-3 py-1.5 font-mono text-[10px] ${
+              kanaType === "hiragana"
+                ? "border-(--color-aizome) bg-(--color-aizome) text-(--color-washi)"
+                : "border-(--color-muted)/30 text-(--color-muted)"
+            }`}
+          >
             HIRAGANA
           </button>
-          <Link
-            href={routes.katakana}
-            className="rounded-sm border border-(--color-muted)/30 px-3 py-1.5 font-mono text-[10px] text-(--color-muted)"
+          <button
+            onClick={() => setKanaType("katakana")}
+            className={`rounded-sm border px-3 py-1.5 font-mono text-[10px] ${
+              kanaType === "katakana"
+                ? "border-(--color-aizome) bg-(--color-aizome) text-(--color-washi)"
+                : "border-(--color-muted)/30 text-(--color-muted)"
+            }`}
           >
             KATAKANA
-          </Link>
+          </button>
         </div>
 
-        <KanaMnemonicCard item={item} kanaType="hiragana" />
+        <KanaMnemonicCard item={item} kanaType={kanaType} />
 
         <div className="mt-6 flex items-center justify-between">
           <InkButton
