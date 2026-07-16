@@ -221,6 +221,33 @@
 - Set up a screenshot-capable run skill (chromium-cli/Playwright) so future UI changes can be visually verified instead of HTML-only checks.
 - Replace the mascot placeholder image in `KanaMnemonicCard` with real per-letter mnemonic illustrations once art is ready.
 
+## Day 11
+
+### Completed
+
+- Resolved the Day 9/10 to-do to rethink hiragana/katakana routing: moved `app/(public)/learn/hiragana/page.tsx` to a single dynamic route, `app/(public)/kana/[type]/[row]/page.tsx`, covering both scripts instead of one hardcoded hiragana page.
+- Page now reads `type` (`hiragana`/`katakana`) and `row` (e.g. `a`, `ka`) from the URL via `useParams`, seeding which row/item to open on; invalid `type` or `row` values call `notFound()`.
+- Replaced the dead HIRAGANA/KATAKANA `Link`-based toggle (KATAKANA pointed at a route that never had a page) with real local-state toggle buttons matching the tab pattern already used in `app/(public)/learn/page.tsx` — switching script no longer navigates, it just re-renders `KanaMnemonicCard` with the other script.
+- Updated `lib/routes.ts`: `learnRow(kana, row)` now points to `/kana/${kana}/${row}`; removed the unused static `hiragana`/`katakana` route entries now that the dynamic route covers both.
+
+### Challenges
+
+- Moving files under `app/` left stale entries in `.next`'s generated type-validator (`.next/types/validator.ts`) pointing at the old file path, which made `tsc --noEmit` fail even though the source was correct — fixed by clearing `.next` so Next regenerates it.
+
+### Learned
+
+- In the App Router, dynamic segments in a `"use client"` page are read with the `useParams` hook rather than an awaited `params` prop (that pattern is for Server Components) — confirmed against the bundled `node_modules/next/dist/docs` since this project's Next version differs from training data per `AGENTS.md`.
+- Seeding local component state from route params once (`useState(() => ...)`) keeps the existing Prev/Next browsing behavior fully client-side, while still letting the URL determine the starting row/script — no need to keep the URL in sync on every Prev/Next click.
+
+### To-Dos
+
+- Rethink on routing structure for hiragana and katakana - Done
+- Decide whether the now-orphaned `app/(public)/learn/katakana/page.tsx` placeholder should be deleted or repurposed, since `/kana/katakana/[row]` supersedes it and nothing links to `/learn/katakana`.
+- Debug integration issues and understand code behind writing pad.
+- Audit remaining components for other `--color-aizome` usages that may need to move to `--color-testsuiro` for palette consistency.
+- Set up a screenshot-capable run skill (chromium-cli/Playwright) so future UI changes can be visually verified instead of HTML-only checks.
+- Replace the mascot placeholder image in `KanaMnemonicCard` with real per-letter mnemonic illustrations once art is ready.
+
 ## 🚩 Milestones
 
 ### Week 1
